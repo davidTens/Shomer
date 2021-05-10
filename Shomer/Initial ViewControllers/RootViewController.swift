@@ -11,7 +11,7 @@ final class RootViewController: UINavigationController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        let lockScreen = TabBarController()
+        let lockScreen = LockedViewController()
         viewControllers = [lockScreen]
     }
 }
