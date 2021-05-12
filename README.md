@@ -18,4 +18,3 @@ VERSION 2.0 COMING SOON!
 
 [IMG_1494](https://user-images.githubusercontent.com/79376703/117939616-4b12a700-b319-11eb-9a29-4c55f8784bbc.PNG)
 
-[Uploading IMG_1493.PNG…]()
