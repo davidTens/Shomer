@@ -10,7 +10,6 @@ import CoreData
 
 final class EnterPasswordToDeleteAll: UIViewController, UITextFieldDelegate {
     
-    private let maxLength = 5
     private let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     private var passwords = [Passwords]()
     private var notes = [Notes]()
@@ -67,14 +66,6 @@ final class EnterPasswordToDeleteAll: UIViewController, UITextFieldDelegate {
         }
         return true
     }
-    
-    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        if passwordTextField == textField {
-            let currentText = textField.text! + string
-            return currentText.count <= maxLength
-        }
-         return true
-       }
     
     @objc private func deleteAll() {
         

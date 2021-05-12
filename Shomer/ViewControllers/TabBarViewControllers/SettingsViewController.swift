@@ -19,7 +19,7 @@ final class SettingsViewController: UITableViewController {
     let cellHeight: CGFloat = 50
     let headerHeightForTwo: CGFloat = 30
     
-    let settingsListSwitcher = ["Biometric Auth", "Require password to erase all", "Make passwords visible"]
+    let settingsListSwitcher = ["Biometric Auth", "Require password to erase all"]
     let settingsListButtons = ["Change password", "Erase all", "Log out"]
     
     private let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
@@ -29,6 +29,8 @@ final class SettingsViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 85, right: 0)
+        tableView.separatorStyle = .none
         navigationItem.title = "Settings"
         navigationController?.navigationBar.barTintColor = UIColor(hexFromString: "#2E315A", alpha: 0.8)
         navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
@@ -75,9 +77,7 @@ final class SettingsViewController: UITableViewController {
     }
     
     func logoutClicked() {
-        let logOut = LockedViewController()
-        logOut.modalPresentationStyle = .fullScreen
-        present(logOut, animated: true, completion: nil)
+        dismiss(animated: true, completion: nil)
     }
     
     func presentAlert(_ message: String) {

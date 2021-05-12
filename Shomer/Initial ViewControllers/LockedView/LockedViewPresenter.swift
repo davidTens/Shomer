@@ -8,19 +8,21 @@
 import Foundation
 import UIKit
 import LocalAuthentication
+import CoreData
 
 protocol LockedViewDelegate: NSObjectProtocol {
     func successfulBiometricAuth()
     func unSuccessfulBiometricAuth()
     func presentEnterPasswrodVC()
     func presentNewPasswordVC()
-    func eraseAll()
-    func addNewClicked()
+    func presentAlertToEraseAll()
+    func passwordToDeleteAll()
 }
 
-class LockedViewPresenter: NSObject {
+final class LockedViewPresenter: NSObject {
     
     weak var lockedViewDelegate: LockedViewDelegate?
+    private let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
     func checkUserValidity() {
         if UserDefaults.standard.bioAuthEnabled() == true {
@@ -54,12 +56,20 @@ class LockedViewPresenter: NSObject {
         }
     }
     
-    func eraseAll() {
-        if UserDefaults.standard.passwordEnabledToEraseAll() == true {
-            
-        } else {
+    func deleteAll() {
+        let deletePasswords = NSBatchDeleteRequest(fetchRequest: Passwords.fetchRequest())
+        let deleteNotes = NSBatchDeleteRequest(fetchRequest: Notes.fetchRequest())
+        do {
+            try context.execute(deletePasswords)
+            try context.execute(deleteNotes)
             
         }
+        catch { print(error) }
+        
+        UserDefaults.standard.removeObject(forKey: UserDefaults.UserDefaultsKeys.bioAuth.rawValue)
+        UserDefaults.standard.removeObject(forKey: UserDefaults.UserDefaultsKeys.passwordEnabledToEraseAll.rawValue)
+        UserDefaults.standard.removeObject(forKey: UserDefaults.UserDefaultsKeys.passwordIsEnabled.rawValue)
+        UserDefaults.standard.removeObject(forKey: UserDefaults.UserDefaultsKeys.passwordString.rawValue)
+        UserDefaults.standard.removeObject(forKey: UserDefaults.UserDefaultsKeys.visiblePasswords.rawValue)
     }
-    
 }

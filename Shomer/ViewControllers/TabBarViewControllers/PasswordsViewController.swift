@@ -22,8 +22,11 @@ final class PasswordsViewController: UITableViewController, UISearchControllerDe
     private lazy var gradientLayer = ViewControllerGradientLayer(layer: CALayer())
     private lazy var errorMessage = ViewControllerErrorMessage()
     
+    lazy var isVisible = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 85, right: 0)
         customRefreshControll.tintColor = .white
         customRefreshControll.addTarget(self, action: #selector(fetchPasswords), for: .valueChanged)
         errorMessage.addTarget(self, action: #selector(dissapearErrorMessage), for: .touchUpInside)
@@ -128,7 +131,7 @@ final class PasswordsViewController: UITableViewController, UISearchControllerDe
     }
     
     func popUpPasswordId(_ id: Passwords) {
-        let savedPassword = SavedPassword()
+        let savedPassword = PasswordsVC()
         savedPassword.passwordId = id
         savedPassword.modalPresentationStyle = .popover
         present(savedPassword, animated: true, completion: nil)

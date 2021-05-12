@@ -16,12 +16,6 @@ final class CustomTableViewCell: UITableViewCell {
         }
     }
     
-    private var visiblePasswors: Bool? {
-        didSet {
-            visiblePasswors = UserDefaults.standard.visiblePasswords() == true ? false : true
-        }
-    }
-    
     var presentAlert: ((_ message: String) -> Void)?
     
     private let lockImageViewISize: CGFloat = 30
@@ -45,7 +39,6 @@ final class CustomTableViewCell: UITableViewCell {
         let subTitle = UITextField()
         subTitle.font = .systemFont(ofSize: 15)
         subTitle.textAlignment = .left
-        subTitle.isSecureTextEntry = visiblePasswors ?? false
         subTitle.backgroundColor = .clear
         subTitle.textColor = .lightGray
         return subTitle
@@ -84,8 +77,8 @@ final class CustomTableViewCell: UITableViewCell {
     
     @objc private func copyPasswordToClipboard() {
         let pasteboard = UIPasteboard.general
-        pasteboard.string = password?.password
         if let pass = password?.password {
+            pasteboard.string = pass
             presentAlert?(pass)
         }
     }

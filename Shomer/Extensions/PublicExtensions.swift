@@ -153,4 +153,5 @@ extension Notification.Name {
     
     static let updatePasswordsViewController = Notification.Name("updatePasswordsViewController")
     static let updateNotesViewController = Notification.Name("updateNotesViewController")
+    static let makePasswordsVisible = Notification.Name("makePasswordsVisible")
 }

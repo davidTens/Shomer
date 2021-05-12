@@ -7,11 +7,11 @@
 
 import UIKit
 
-final class SavedNote: UITableViewController {
+final class NotesVC: UITableViewController {
     
-    private let cellId = "cellId"
-    private lazy var headerView = UIView()
-    private let headerHeight: CGFloat = 300
+    let cellId = "cellId"
+    lazy var headerView = UIView()
+    let headerHeight: CGFloat = 420
     private let textViewPadding: CGFloat = 15
     private let gradientColors = [UIColor(hexFromString: "#262D40").cgColor, UIColor(hexFromString: "#34406C").cgColor]
     
@@ -21,7 +21,7 @@ final class SavedNote: UITableViewController {
         didSet {
             titleTextField.text = noteId?.title
             textView.text = noteId?.text
-            
+            dateLabel.text = noteId?.date
         }
     }
     
@@ -44,39 +44,14 @@ final class SavedNote: UITableViewController {
         return gradientLayer
     }()
     
-    private lazy var titleTextField: UITextField = {
-        let titleTextField = UITextField()
-        titleTextField.font = UIFont(name: "Avenir", size: 16)
-        titleTextField.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: 0))
-        titleTextField.rightView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: 0))
-        titleTextField.leftViewMode = .always
-        titleTextField.rightViewMode = .always
-        titleTextField.textAlignment = .left
-        titleTextField.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.2)
-        titleTextField.textColor = .white
-        titleTextField.layer.cornerRadius = 10
-        titleTextField.clearButtonMode = .whileEditing
-        return titleTextField
-    }()
+    private lazy var titleTextField = NoteTitleTextField()
+    private lazy var textView = NoteTextView()
     
     private lazy var textFieldBottomLine: UIView = {
         let textFieldBottomLine = UIView()
         textFieldBottomLine.backgroundColor = .white
         textFieldBottomLine.layer.cornerRadius = 3
         return textFieldBottomLine
-    }()
-    
-    private lazy var textView: UITextView = {
-        let textView = UITextView()
-        textView.textContainerInset = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
-        textView.font = UIFont(name: "Aevnir", size: 16)
-        textView.textAlignment = .left
-        textView.isEditable = true
-        textView.isScrollEnabled = false
-        textView.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.2)
-        textView.layer.cornerRadius = 10
-        textView.textColor = .white
-        return textView
     }()
     
     private lazy var textViewBottomLine: UIView = {
@@ -126,12 +101,10 @@ final class SavedNote: UITableViewController {
         dateLabel.font = UIFont(name: "Avenir", size: 18)
         dateLabel.adjustsFontSizeToFitWidth = true
         dateLabel.backgroundColor = .clear
-        dateLabel.textAlignment = .left
+        dateLabel.textAlignment = .center
         dateLabel.textColor = .white
         return dateLabel
     }()
-    
-    deinit { print("no memory leaks from notes") }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -145,6 +118,15 @@ final class SavedNote: UITableViewController {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         gradientLayer.frame = backgroundGradient.bounds
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        view.endEditing(true)
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        tableView.endEditing(true)
     }
     
     private func interface() {
@@ -173,18 +155,19 @@ final class SavedNote: UITableViewController {
 
         buttonsBackground.addSubview(stackView)
         stackView.fillSuperview()
-
+        
+        headerView.addSubview(dateLabel)
         headerView.addSubview(titleTextField)
         headerView.addSubview(textFieldBottomLine)
         headerView.addSubview(textView)
         headerView.addSubview(textViewBottomLine)
-        headerView.addSubview(dateLabel)
         
-        titleTextField.layout(top: headerView.topAnchor, leading: headerView.leadingAnchor, bottom: nil, trailing: headerView.trailingAnchor, padding: .init(top: 12, left: 15, bottom: 0, right: 15), size: .init(width: 0, height: 40))
+        dateLabel.layout(top: nil, leading: headerView.leadingAnchor, bottom: buttonsBackground.topAnchor, trailing: headerView.trailingAnchor, padding: .init(top: 0, left: textViewPadding, bottom: textViewPadding, right: textViewPadding), size: .init(width: 0, height: 24))
+        titleTextField.layout(top: headerView.topAnchor, leading: headerView.leadingAnchor, bottom: nil, trailing: headerView.trailingAnchor, padding: .init(top: 15, left: 15, bottom: 0, right: 15), size: .init(width: 0, height: 40))
         textFieldBottomLine.layout(top: titleTextField.bottomAnchor, leading: titleTextField.leadingAnchor, bottom: nil, trailing: titleTextField.trailingAnchor, padding: .init(top: 0, left: 15, bottom: 0, right: 15), size: .init(width: 0, height: 1))
-        textView.layout(top: titleTextField.bottomAnchor, leading: headerView.leadingAnchor, bottom: buttonsBackground.topAnchor, trailing: headerView.trailingAnchor, padding: .init(top: 10, left: textViewPadding, bottom: textViewPadding, right: textViewPadding))
+        textView.layout(top: titleTextField.bottomAnchor, leading: headerView.leadingAnchor, bottom: dateLabel.topAnchor, trailing: headerView.trailingAnchor, padding: .init(top: 15, left: textViewPadding, bottom: textViewPadding, right: textViewPadding))
         textViewBottomLine.layout(top: textView.bottomAnchor, leading: textView.leadingAnchor, bottom: nil, trailing: headerView.trailingAnchor, padding: .init(top: 0, left: 15, bottom: 0, right: 15), size: .init(width: 0, height: 1))
-        dateLabel.layout(top: textView.bottomAnchor, leading: textView.leadingAnchor, bottom: nil, trailing: textView.trailingAnchor, padding: .init(top: 15, left: 0, bottom: 0, right: 0), size: .init(width: 0, height: 30))
+        
     }
     
     @objc private func cancelClicked() {
@@ -240,29 +223,6 @@ final class SavedNote: UITableViewController {
         alert.addAction(cancel)
         alert.addAction(ok)
         present(alert, animated: true, completion: nil)
-    }
-    
-    // MARK: - tableView dataSource
-    
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
-    }
-    
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 0
-    }
-    
-    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return headerHeight
-    }
-    
-    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        return headerView
-    }
-    
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath)
-        return cell
     }
 }
 

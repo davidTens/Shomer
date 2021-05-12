@@ -7,12 +7,12 @@
 
 import UIKit
 
-final class SavedPassword: UITableViewController {
+final class PasswordsVC: UITableViewController {
     
-    private let cellId = "cellId"
-    private lazy var headerView = UIView()
-    private let headerHeight: CGFloat = 370.0
-    private let cellHeight: CGFloat = 55
+    let cellId = "cellId"
+    lazy var headerView = UIView()
+    let headerHeight: CGFloat = 370.0
+    let cellHeight: CGFloat = 55
     private let textFieldHeight: CGFloat = 50
     private let textFieldLRPadding: CGFloat = 20
     private let gradientColors = [UIColor(hexFromString: "#262D40").cgColor, UIColor(hexFromString: "#34406C").cgColor]
@@ -27,61 +27,10 @@ final class SavedPassword: UITableViewController {
         }
     }
     
-    private lazy var appTextField: UITextField = {
-        let textField = UITextField()
-        textField.attributedPlaceholder = NSAttributedString(string: "app", attributes: [NSAttributedString.Key.foregroundColor: UIColor(hexFromString: "#9B9898", alpha: 0.8)])
-        textField.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.1)
-        textField.font = UIFont(name: "Avenir", size: 18)
-        textField.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: textFieldHeight))
-        textField.leftViewMode = .always
-        textField.clearButtonMode = .whileEditing
-        textField.keyboardAppearance = .dark
-        textField.clearButtonMode = .always
-        textField.textColor = .white
-        textField.layer.cornerRadius = 6
-        return textField
-    }()
-    private lazy var accountTextField: UITextField = {
-        let textField = UITextField()
-        textField.attributedPlaceholder = NSAttributedString(string: "Account", attributes: [NSAttributedString.Key.foregroundColor: UIColor(hexFromString: "#9B9898", alpha: 0.8)])
-        textField.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.1)
-        textField.font = UIFont(name: "Avenir", size: 18)
-        textField.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: textFieldHeight))
-        textField.leftViewMode = .always
-        textField.clearButtonMode = .whileEditing
-        textField.keyboardAppearance = .dark
-        textField.clearButtonMode = .always
-        textField.textColor = .white
-        textField.layer.cornerRadius = 6
-        textField.keyboardType = .emailAddress
-        return textField
-    }()
-    private lazy var passwordTextField: UITextField = {
-        let textField = UITextField()
-        textField.attributedPlaceholder = NSAttributedString(string: "Password", attributes: [NSAttributedString.Key.foregroundColor: UIColor(hexFromString: "#9B9898", alpha: 0.8)])
-        textField.isSecureTextEntry = false
-        textField.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.1)
-        textField.font = UIFont(name: "Avenir", size: 18)
-        textField.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: textFieldHeight))
-        textField.leftViewMode = .always
-        textField.clearButtonMode = .whileEditing
-        textField.keyboardAppearance = .dark
-        textField.clearButtonMode = .always
-        textField.textColor = .white
-        textField.layer.cornerRadius = 6
-        return textField
-    }()
-    
-    private lazy var dateLabel: UILabel = {
-        let dateLabel = UILabel()
-        dateLabel.font = UIFont(name: "Avenir", size: 18)
-        dateLabel.adjustsFontSizeToFitWidth = true
-        dateLabel.backgroundColor = .clear
-        dateLabel.textAlignment = .left
-        dateLabel.textColor = .white
-        return dateLabel
-    }()
-    
+    private lazy var appTextField = PasswordAppTextField()
+    private lazy var accountTextField = PasswordAppTextField()
+    private lazy var passwordTextField = PasswordPasswordTextField()
+    private lazy var dateLabel = DateLabel()
     private lazy var appBottomLine = UIView()
     private lazy var accountBottomLine = UIView()
     private lazy var passwordBottomLine = UIView()
@@ -135,8 +84,6 @@ final class SavedPassword: UITableViewController {
         return doneButton
     }()
     
-    deinit { print("no memory leadks from savedPassword")}
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.backgroundColor = UIColor(hexFromString: "#273250")
@@ -146,13 +93,17 @@ final class SavedPassword: UITableViewController {
         headerSetUp()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        view.endEditing(true)
+    }
+    
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         gradientLayer.frame = backgroundGradient.bounds
     }
     
     fileprivate func headerSetUp() {
-        
         headerView.translatesAutoresizingMaskIntoConstraints = false
         headerView.layer.masksToBounds = false
         headerView.layer.shadowColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.3).cgColor
@@ -185,7 +136,6 @@ final class SavedPassword: UITableViewController {
         let stackView = UIStackView(arrangedSubviews: [cancelButton, saveButton])
         stackView.axis = .horizontal
         stackView.distribution = .fillEqually
-        
         buttonsBackground.addSubview(stackView)
         stackView.fillSuperview()
     }
@@ -199,7 +149,6 @@ final class SavedPassword: UITableViewController {
             line.layer.cornerRadius = 2
             headerView.addSubview(line)
     })
-        
         appTextField.layout(top: headerView.topAnchor, leading: headerView.leadingAnchor, bottom: nil, trailing: headerView.trailingAnchor, padding: .init(top: 50, left: textFieldLRPadding, bottom: 0, right: textFieldLRPadding), size: .init(width: 0, height: textFieldHeight))
         accountTextField.layout(top: appTextField.bottomAnchor, leading: appTextField.leadingAnchor, bottom: nil, trailing: appTextField.trailingAnchor, padding: .init(top: 15, left: 0, bottom: 0, right: 0), size: .init(width: 0, height: textFieldHeight))
         passwordTextField.layout(top: accountTextField.bottomAnchor, leading: appTextField.leadingAnchor, bottom: nil, trailing: appTextField.trailingAnchor, padding: .init(top: 15, left: 0, bottom: 0, right: 0), size: .init(width: 0, height: textFieldHeight))
@@ -207,7 +156,6 @@ final class SavedPassword: UITableViewController {
         accountBottomLine.layout(top: nil, leading: accountTextField.leadingAnchor, bottom: accountTextField.bottomAnchor, trailing: accountTextField.trailingAnchor, padding: .init(top: 1, left: 0, bottom: 0, right: 0), size: .init(width: 0, height: 1))
         passwordBottomLine.layout(top: nil, leading: passwordTextField.leadingAnchor, bottom: passwordTextField.bottomAnchor, trailing: passwordTextField.trailingAnchor, padding: .init(top: 1, left: 0, bottom: 0, right: 0), size: .init(width: 0, height: 1))
         dateLabel.layout(top: passwordTextField.bottomAnchor, leading: passwordTextField.leadingAnchor, bottom: nil, trailing: passwordTextField.trailingAnchor, padding: .init(top: 15, left: 0, bottom: 0, right: 0), size: .init(width: 0, height: 30))
-        
     }
     
     @objc private func saveClicked() {
@@ -224,7 +172,6 @@ final class SavedPassword: UITableViewController {
         if accountTextField.text?.isEmpty == true && passwordTextField.text?.isEmpty == true {
             alertMessage(title: "Delete", message: "Do you want to delete this file ?")
         }
-        
         if accountTextField.text != "" && passwordTextField.text != "" {
             passwordId?.account = accountTextField.text
             passwordId?.password = passwordTextField.text
@@ -264,35 +211,4 @@ final class SavedPassword: UITableViewController {
     @objc private func cancelClicked() {
         self.dismiss(animated: true, completion: nil)
     }
-}
-
-// MARK: - tableView dataSource
-
-extension SavedPassword {
-    
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
-    }
-    
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 0
-    }
-    
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath)
-        return cell
-    }
-    
-    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return cellHeight
-    }
-    
-    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return headerHeight
-    }
-    
-    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        return headerView
-    }
-    
 }

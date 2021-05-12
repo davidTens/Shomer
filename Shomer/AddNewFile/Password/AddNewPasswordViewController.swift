@@ -9,16 +9,15 @@ import UIKit
 
 final class AddNewPasswordTableViewController: UITableViewController {
     
-    private let cellId = "cellId"
-    private lazy var headerView = UIView()
-    private let headerHeight: CGFloat = 370.0
-    private let cellHeight: CGFloat = 55
+    let cellId = "cellId"
+    lazy var headerView = UIView()
+    let headerHeight: CGFloat = 370.0
+    let cellHeight: CGFloat = 55
     private let textFieldHeight: CGFloat = 50
     private let textFieldLRPadding: CGFloat = 20
     private let gradientColors = [UIColor(hexFromString: "#262D40").cgColor, UIColor(hexFromString: "#34406C").cgColor]
     private let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
-//    private weak var passwordsVC: PasswordsViewController?
     private lazy var appTextField = AppTextField()
     private lazy var accountTextField = AccountTextField()
     private lazy var passwordTextField = PasswordTextField()
@@ -31,8 +30,6 @@ final class AddNewPasswordTableViewController: UITableViewController {
     private lazy var verticalLine = VerticalLine()
     private lazy var cancelButton = CancelButton()
     private lazy var saveButton = SaveButton()
-    
-    deinit { print("no memory leaks from passwords") }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -102,7 +99,6 @@ final class AddNewPasswordTableViewController: UITableViewController {
         appBottomLine.layout(top: nil, leading: appTextField.leadingAnchor, bottom: appTextField.bottomAnchor, trailing: appTextField.trailingAnchor, padding: .init(top: 1, left: 0, bottom: 0, right: 0), size: .init(width: 0, height: 1))
         accountBottomLine.layout(top: nil, leading: accountTextField.leadingAnchor, bottom: accountTextField.bottomAnchor, trailing: accountTextField.trailingAnchor, padding: .init(top: 1, left: 0, bottom: 0, right: 0), size: .init(width: 0, height: 1))
         passwordBottomLine.layout(top: nil, leading: passwordTextField.leadingAnchor, bottom: passwordTextField.bottomAnchor, trailing: passwordTextField.trailingAnchor, padding: .init(top: 1, left: 0, bottom: 0, right: 0), size: .init(width: 0, height: 1))
-        
     }
     
     @objc private func saveClicked() {
@@ -136,37 +132,6 @@ final class AddNewPasswordTableViewController: UITableViewController {
     }
     
     @objc private func cancelClicked() {
-        self.dismiss(animated: true, completion: nil)
+        dismiss(animated: true, completion: nil)
     }
-}
-
-// MARK: - tableView dataSource
-
-extension AddNewPasswordTableViewController {
-    
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
-    }
-    
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 0
-    }
-    
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath)
-        return cell
-    }
-    
-    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return cellHeight
-    }
-    
-    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return headerHeight
-    }
-    
-    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        return headerView
-    }
-    
 }

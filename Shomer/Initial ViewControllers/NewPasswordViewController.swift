@@ -22,18 +22,7 @@ final class NewPasswordViewController: UIViewController, UITextFieldDelegate {
     private lazy var retypeTextField = UITextField()
     private lazy var passwordLine = UIView()
     private lazy var retypeLine = UIView()
-    private var maxLength = 5
-    
-    private lazy var warningMessage: UIButton = {
-        let warningMessage = UIButton()
-        warningMessage.addTarget(self, action: #selector(warningMessageDissapear), for: .touchUpInside)
-        warningMessage.setTitle("Max number of characters \(maxLength)", for: .normal)
-        warningMessage.titleLabel?.font = UIFont(name: "Avenir", size: 18)
-        warningMessage.titleLabel?.textAlignment = .center
-        warningMessage.setTitleColor(.white, for: .normal)
-        warningMessage.backgroundColor = #colorLiteral(red: 0.5982155204, green: 0.3845223784, blue: 1, alpha: 1)
-        return warningMessage
-    }()
+    private lazy var lockedView = LockedViewController()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -75,47 +64,20 @@ final class NewPasswordViewController: UIViewController, UITextFieldDelegate {
         passwordTextField.becomeFirstResponder()
     }
     
-    private func warningMessageAppear() {
-        
-        if warningMessage.superview == nil {
-            warningMessage.frame = CGRect(x: view.frame.width / 2, y: 0, width: 0, height: 0)
-            view.addSubview(warningMessage)
-            warningMessage.layout(top: view.topAnchor, leading: view.leadingAnchor, bottom: nil, trailing: view.trailingAnchor, size: .init(width: 0, height: 50))
-            
-            UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
-                self.view.layoutIfNeeded()
-            }, completion: nil)
-        }
-    }
-    
-    @objc private func warningMessageDissapear() {
-        warningMessage.translatesAutoresizingMaskIntoConstraints = true
-        warningMessage.frame = CGRect(x: 0, y: 0, width: 0, height: 0)
-        warningMessage.removeFromSuperview()
-        UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
-            self.view.layoutIfNeeded()
-        }, completion: nil)
-    }
-    
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        doneClicked()
+        createUser()
         return true
     }
     
-    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        if passwordTextField == textField {
-            let currentText = textField.text! + string
-            warningMessageAppear()
-            return currentText.count <= maxLength
+    func textFieldDidChangeSelection(_ textField: UITextField) {
+        if textField == retypeTextField {
+            if passwordTextField.text == retypeTextField.text {
+                createUser()
+            }
         }
-        if retypeTextField == textField  {
-            let currentText = textField.text! + string
-            return currentText.count <= maxLength
-        }
-         return true
-       }
+    }
     
-    @objc private func showTabBar() {
+    @objc private func successfulAuth() {
         let tabbar = TabBarController()
         tabbar.modalPresentationStyle = .fullScreen
         present(tabbar, animated: true, completion: nil)
@@ -123,10 +85,10 @@ final class NewPasswordViewController: UIViewController, UITextFieldDelegate {
     
     private func enabledBiometrics() {
         UserDefaults.standard.setBioAuthEnabled(true)
-        showTabBar()
+        successfulAuth()
     }
     
-    private func doneClicked() {
+    private func createUser() {
         if passwordTextField.text?.isEmpty == true {
             passwordLine.backgroundColor = .red
         } else if passwordTextField.text != "" {
@@ -138,18 +100,16 @@ final class NewPasswordViewController: UIViewController, UITextFieldDelegate {
                 retypeLine.backgroundColor = .white
                 UserDefaults.standard.setPasswordString(retypeTextField.text!)
                 UserDefaults.standard.passwordIsEnabled(true)
-                let alert = UIAlertController(title: "Biometry Auth", message: "Would you like to enable biomentric authentication ?", preferredStyle: .alert)
+                let alert = UIAlertController(title: "Biometric Auth", message: "Would you like to enable biomentric authentication ?", preferredStyle: .alert)
                 let noThanks = UIAlertAction(title: "No Thanks", style: .cancel) { [weak self] _ in
-                    self?.showTabBar()
+                    self?.successfulAuth()
                 }
                 let alertAction = UIAlertAction(title: "Yes", style: .default) { [weak self] _ in
                     self?.enabledBiometrics()
                 }
                 alert.addAction(noThanks)
                 alert.addAction(alertAction)
-                present(alert, animated: true) { [weak self] in
-                    self?.perform(#selector(self?.showTabBar), with: nil, afterDelay: 0.01)
-                }
+                present(alert, animated: true, completion: nil)
             } else if retypeTextField.text?.isEmpty == false, retypeTextField.text != passwordTextField.text {
                 retypeLine.backgroundColor = .red
             }
@@ -157,14 +117,8 @@ final class NewPasswordViewController: UIViewController, UITextFieldDelegate {
     }
     
     private func retypeAppear() {
-        
         retypeTextField.alpha = 1
         retypeLine.alpha = 1
         retypeTextField.becomeFirstResponder()
-        
-        UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations:  {
-            self.view.layoutIfNeeded()
-        }, completion: nil)
-
     }
 }

@@ -18,7 +18,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.makeKeyAndVisible()
         window?.rootViewController = RootViewController()
+        application.statusBarStyle = .lightContent
         return true
+    }
+    
+    func applicationDidEnterBackground(_ application: UIApplication) {
+        saveContext()
     }
 
     // MARK: - Core Data stack

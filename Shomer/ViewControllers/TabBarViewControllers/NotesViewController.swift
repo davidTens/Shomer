@@ -21,6 +21,7 @@ final class NotesViewController: UITableViewController, UISearchControllerDelega
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 85, right: 0)
         customRefreshControll.tintColor = .white
         customRefreshControll.addTarget(self, action: #selector(fetchNotes), for: .valueChanged)
         tableView.addSubview(customRefreshControll)
@@ -103,7 +104,7 @@ final class NotesViewController: UITableViewController, UISearchControllerDelega
     }
     
     func popUpNoteId(_ id: Notes) {
-        let savedPassword = SavedNote()
+        let savedPassword = NotesVC()
         savedPassword.noteId = id
         savedPassword.modalPresentationStyle = .popover
         present(savedPassword, animated: true, completion: nil)

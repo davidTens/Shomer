@@ -68,6 +68,7 @@ final class PasswordTextField: UITextField {
         textColor = .white
         layer.cornerRadius = 6
         isSecureTextEntry = false
+        clearButtonMode = .always
     }
     
     required init?(coder: NSCoder) {

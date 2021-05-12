@@ -43,13 +43,8 @@ extension SettingsViewController {
                     cell.switcher.isOn = true
                 }
             }
-            if UserDefaults.standard.visiblePasswords() == true {
-                if settingsListSwitcher[indexPath.row] == "Make passwords visible" {
-                    cell.switcher.isOn = true
-                }
-            }
             if UserDefaults.standard.passwordEnabledToEraseAll() == true {
-                if settingsListSwitcher[indexPath.row] == "Require password to erase all when locked" {
+                if settingsListSwitcher[indexPath.row] == "Require password to erase all" {
                     cell.switcher.isOn = true
                 }
             }
@@ -70,14 +65,6 @@ extension SettingsViewController {
                         UserDefaults.standard.setpasswordEnabledToEraseAll(false)
                     }
                 }
-                if self.settingsListSwitcher[indexPath.row] == "Make passwords visible" {
-                    if switcher.isOn == true {
-                        UserDefaults.standard.setVisiblePasswords(true)
-                    } else {
-                        UserDefaults.standard.setVisiblePasswords(false)
-                    }
-                }
-                
             }
             return cell
         } else {

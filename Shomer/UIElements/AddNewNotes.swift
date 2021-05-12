@@ -52,6 +52,8 @@ final class AddNewNotesTitleTextField: UITextField {
         textColor = .white
         layer.cornerRadius = 10
         clearButtonMode = .whileEditing
+        placeholder = "title"
+        keyboardAppearance = .dark
     }
     
     required init?(coder: NSCoder) {
@@ -77,13 +79,14 @@ final class AddNewNotesTextView: UITextView {
     override init(frame: CGRect, textContainer: NSTextContainer?) {
         super.init(frame: frame, textContainer: textContainer)
         textContainerInset = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
-        font = UIFont(name: "Aevnir", size: 16)
+        font = .systemFont(ofSize: 15)
         textAlignment = .left
         isEditable = true
-        isScrollEnabled = false
+        isScrollEnabled = true
         backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.2)
         layer.cornerRadius = 10
         textColor = .white
+        keyboardAppearance = .dark
     }
     
     required init?(coder: NSCoder) {
@@ -91,7 +94,7 @@ final class AddNewNotesTextView: UITextView {
     }
 }
 
-final class AddNewNotesTexViewBottomLine: UIView {
+final class AddNewNotesTextViewBottomLine: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)

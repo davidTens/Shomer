@@ -9,9 +9,9 @@ import UIKit
 
 final class AddNewNoteViewController: UITableViewController {
     
-    private let cellId = "cellId"
-    private lazy var headerView = UIView()
-    private let headerHeight: CGFloat = 300
+    let cellId = "cellId"
+    lazy var headerView = UIView()
+    let headerHeight: CGFloat = 420
     private let textViewPadding: CGFloat = 15
     private let gradientColors = [UIColor(hexFromString: "#262D40").cgColor, UIColor(hexFromString: "#34406C").cgColor]
     private let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
@@ -22,13 +22,11 @@ final class AddNewNoteViewController: UITableViewController {
     private lazy var titleTextField = AddNewNotesTitleTextField()
     private lazy var textFieldBottomLine = AddNewNotesTextFieldBottomLIne()
     private lazy var textView = AddNewNotesTextView()
-    private lazy var textViewBottomLine = AddNewNotesTextView()
+    private lazy var textViewBottomLine = AddNewNotesTextViewBottomLine()
     private lazy var buttonsBackground = ButtonsBackground()
     private lazy var verticalLine = VerticalLine()
     private lazy var cancelButton = CancelButton()
     private lazy var saveButton = SaveButton()
-    
-    deinit { print("no memory leaks from notes") }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -75,9 +73,9 @@ final class AddNewNoteViewController: UITableViewController {
         headerView.addSubview(textFieldBottomLine)
         headerView.addSubview(textView)
         headerView.addSubview(textViewBottomLine)
-        titleTextField.layout(top: headerView.topAnchor, leading: headerView.leadingAnchor, bottom: nil, trailing: headerView.trailingAnchor, padding: .init(top: 12, left: 15, bottom: 0, right: 15), size: .init(width: 0, height: 40))
+        titleTextField.layout(top: headerView.topAnchor, leading: headerView.leadingAnchor, bottom: nil, trailing: headerView.trailingAnchor, padding: .init(top: 15, left: 15, bottom: 0, right: 15), size: .init(width: 0, height: 40))
         textFieldBottomLine.layout(top: titleTextField.bottomAnchor, leading: titleTextField.leadingAnchor, bottom: nil, trailing: titleTextField.trailingAnchor, padding: .init(top: 0, left: 15, bottom: 0, right: 15), size: .init(width: 0, height: 1))
-        textView.layout(top: titleTextField.bottomAnchor, leading: headerView.leadingAnchor, bottom: buttonsBackground.topAnchor, trailing: headerView.trailingAnchor, padding: .init(top: 10, left: textViewPadding, bottom: textViewPadding, right: textViewPadding))
+        textView.layout(top: titleTextField.bottomAnchor, leading: headerView.leadingAnchor, bottom: buttonsBackground.topAnchor, trailing: headerView.trailingAnchor, padding: .init(top: 15, left: textViewPadding, bottom: textViewPadding, right: textViewPadding))
         textViewBottomLine.layout(top: textView.bottomAnchor, leading: textView.leadingAnchor, bottom: nil, trailing: headerView.trailingAnchor, padding: .init(top: 0, left: 15, bottom: 0, right: 15), size: .init(width: 0, height: 1))
         
         cancelButton.addTarget(self, action: #selector(cancelClicked), for: .touchUpInside)
@@ -115,28 +113,5 @@ final class AddNewNoteViewController: UITableViewController {
                 print("error uccured")
             }
         }
-    }
-    
-    // MARK: - tableView dataSource
-    
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
-    }
-    
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 0
-    }
-    
-    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return headerHeight
-    }
-    
-    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        return headerView
-    }
-    
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath)
-        return cell
     }
 }

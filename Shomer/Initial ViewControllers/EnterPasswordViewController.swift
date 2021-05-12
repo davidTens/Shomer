@@ -9,7 +9,7 @@ import UIKit
 
 final class EnterPasswordViewController: UIViewController, UITextFieldDelegate {
     
-    private let maxLength = 5
+    let lockedView = LockedViewController()
     
     private lazy var label: UILabel = {
         let label = UILabel()
@@ -31,13 +31,13 @@ final class EnterPasswordViewController: UIViewController, UITextFieldDelegate {
         textfield.returnKeyType = .done
         textfield.layer.cornerRadius = 10
         textfield.delegate = self
-        textfield.clearButtonMode = .always
+        textfield.keyboardAppearance = .dark
         return textfield
     }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = #colorLiteral(red: 0.5819670558, green: 0.3667315543, blue: 1, alpha: 1)
+        view.backgroundColor = #colorLiteral(red: 0.3898166418, green: 0.2482358515, blue: 0.6821683049, alpha: 1)
         interface()
         passwordTextField.becomeFirstResponder()
     }
@@ -54,25 +54,26 @@ final class EnterPasswordViewController: UIViewController, UITextFieldDelegate {
         passwordTextField.layout(top: label.bottomAnchor, leading: view.leadingAnchor, bottom: nil, trailing: view.trailingAnchor, padding: .init(top: 15, left: 70, bottom: 0, right: 70), size: .init(width: 0, height: 50))
     }
     
+    func textFieldDidChangeSelection(_ textField: UITextField) {
+        if textField == passwordTextField {
+            if UserDefaults.standard.passwordString() == passwordTextField.text {
+                succesfulAuth()
+            }
+        }
+    }
+    
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         if UserDefaults.standard.passwordString() == passwordTextField.text {
-            showTabBar()
+            succesfulAuth()
         } else {
-            label.textColor = .red
+            label.textColor = #colorLiteral(red: 1, green: 0, blue: 0.3059836924, alpha: 1)
             label.text = "Wrong password"
         }
         return true
     }
     
-    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        if passwordTextField == textField {
-            let currentText = textField.text! + string
-            return currentText.count <= maxLength
-        }
-         return true
-       }
-    
-    @objc private func showTabBar() {
+    @objc private func succesfulAuth() {
+        passwordTextField.text = nil
         let tabbar = TabBarController()
         tabbar.modalPresentationStyle = .fullScreen
         present(tabbar, animated: true, completion: nil)

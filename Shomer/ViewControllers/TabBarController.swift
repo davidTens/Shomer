@@ -64,17 +64,13 @@ final class TabBarController: UITabBarController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.navigationBar.isHidden = true
-
+        NotificationCenter.default.addObserver(self, selector: #selector(applicationWillResignActive), name: UIApplication.willResignActiveNotification, object: nil)
     }
-//
-//    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
-//        super.traitCollectionDidChange(previousTraitCollection)
-//        if traitCollection.userInterfaceStyle == .dark {
-//            customTabBarView.effect = UIBlurEffect(style: .dark)
-//        } else {
-//            customTabBarView.effect = UIBlurEffect(style: .light)
-//        }
-//    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        NotificationCenter.default.removeObserver(self)
+    }
     
     private func tabBarSetup() {
         
@@ -121,7 +117,7 @@ final class TabBarController: UITabBarController {
     }
     
     @objc private func addButtonPressed(_ sender: UIButton) {
-        let alertSheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        let alertSheet = UIAlertController(title: "New", message: nil, preferredStyle: .actionSheet)
         let passwordsAction = UIAlertAction(title: "Password", style: .default) { [weak self] _  in
             let addNewController = AddNewPasswordTableViewController()
             addNewController.modalPresentationStyle = .popover
@@ -143,18 +139,17 @@ final class TabBarController: UITabBarController {
         sender.tintColor = .white
     }
     
+    @objc private func applicationWillResignActive() {
+        dismiss(animated: false, completion: nil)
+    }
+    
     private func interfaceSetup() {
         
         view.addSubview(customTabBarView)
         view.addSubview(addButton)
         
         customTabBarView.layout(top: nil, leading: view.safeAreaLayoutGuide.leadingAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, trailing: view.safeAreaLayoutGuide.trailingAnchor, padding: .init(top: 0, left: sidePadding, bottom: 12, right: sidePadding), size: .init(width: 0, height: barHeight))
-        
         addButton.xyAnchors(x: customTabBarView.contentView.centerXAnchor, y: customTabBarView.contentView.centerYAnchor, size: .init(width: addButtonSize, height: addButtonSize), yPadding: -15)
         
-    }
-    
-    @objc private func popAddView() {
-        print("add pressed")
     }
 }

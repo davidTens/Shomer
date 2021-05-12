@@ -8,8 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		752E9855264470BD002A5BF2 /* NotesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 752E9854264470BD002A5BF2 /* NotesTableViewCell.swift */; };
-		752E9858264498B4002A5BF2 /* SavedPassword.swift in Sources */ = {isa = PBXBuildFile; fileRef = 752E9857264498B4002A5BF2 /* SavedPassword.swift */; };
-		752E985A264498BD002A5BF2 /* SavedNote.swift in Sources */ = {isa = PBXBuildFile; fileRef = 752E9859264498BD002A5BF2 /* SavedNote.swift */; };
+		752E9858264498B4002A5BF2 /* PasswordsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 752E9857264498B4002A5BF2 /* PasswordsVC.swift */; };
+		752E985A264498BD002A5BF2 /* NotesVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 752E9859264498BD002A5BF2 /* NotesVC.swift */; };
 		752E985C2645125E002A5BF2 /* PasswordsVCExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 752E985B2645125E002A5BF2 /* PasswordsVCExtension.swift */; };
 		752E985E26451335002A5BF2 /* NotesVCExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 752E985D26451335002A5BF2 /* NotesVCExtension.swift */; };
 		752E9860264513D4002A5BF2 /* SettingsVCExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 752E985F264513D4002A5BF2 /* SettingsVCExtension.swift */; };
@@ -32,7 +32,6 @@
 		75776AED262F1ECC0011C670 /* NotesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75776AEC262F1ECC0011C670 /* NotesViewController.swift */; };
 		75776AF0262F1EFA0011C670 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75776AEF262F1EFA0011C670 /* SettingsViewController.swift */; };
 		757F78D7262C4E6D00DA4CAD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 757F78D6262C4E6D00DA4CAD /* AppDelegate.swift */; };
-		757F78D9262C4E6D00DA4CAD /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 757F78D8262C4E6D00DA4CAD /* SceneDelegate.swift */; };
 		757F78DB262C4E6D00DA4CAD /* AllViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 757F78DA262C4E6D00DA4CAD /* AllViewController.swift */; };
 		757F78E1262C4E6D00DA4CAD /* Shomer.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 757F78DF262C4E6D00DA4CAD /* Shomer.xcdatamodeld */; };
 		757F78E3262C4E6F00DA4CAD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 757F78E2262C4E6F00DA4CAD /* Assets.xcassets */; };
@@ -41,12 +40,20 @@
 		75BBA380263BD6CC00E846B7 /* AddNewPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75BBA37F263BD6CC00E846B7 /* AddNewPasswordViewController.swift */; };
 		75BBA384263BDAF600E846B7 /* SettingsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75BBA383263BDAF600E846B7 /* SettingsCell.swift */; };
 		75BBA386263C27CA00E846B7 /* LockedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75BBA385263C27CA00E846B7 /* LockedViewController.swift */; };
+		75E8EB1D264A54360071BDD1 /* LockedViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75E8EB1C264A54360071BDD1 /* LockedViewExtensions.swift */; };
+		75E8EB1F264B9F8E0071BDD1 /* AddNewPasswordExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75E8EB1E264B9F8E0071BDD1 /* AddNewPasswordExtension.swift */; };
+		75E8EB21264B9FF30071BDD1 /* AddNewNoteExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75E8EB20264B9FF30071BDD1 /* AddNewNoteExtension.swift */; };
+		75E8EB23264BA0C80071BDD1 /* AllVCExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75E8EB22264BA0C80071BDD1 /* AllVCExtension.swift */; };
+		75E8EB26264BA2930071BDD1 /* NoteVCExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75E8EB25264BA2930071BDD1 /* NoteVCExtension.swift */; };
+		75E8EB28264BA2CF0071BDD1 /* PasswordVCExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75E8EB27264BA2CF0071BDD1 /* PasswordVCExtension.swift */; };
+		75E8EB2B264BA37D0071BDD1 /* PasswordUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75E8EB2A264BA37D0071BDD1 /* PasswordUI.swift */; };
+		75E8EB2D264BA6D40071BDD1 /* NoteUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75E8EB2C264BA6D40071BDD1 /* NoteUI.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		752E9854264470BD002A5BF2 /* NotesTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesTableViewCell.swift; sourceTree = "<group>"; };
-		752E9857264498B4002A5BF2 /* SavedPassword.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedPassword.swift; sourceTree = "<group>"; };
-		752E9859264498BD002A5BF2 /* SavedNote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedNote.swift; sourceTree = "<group>"; };
+		752E9857264498B4002A5BF2 /* PasswordsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordsVC.swift; sourceTree = "<group>"; };
+		752E9859264498BD002A5BF2 /* NotesVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesVC.swift; sourceTree = "<group>"; };
 		752E985B2645125E002A5BF2 /* PasswordsVCExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordsVCExtension.swift; sourceTree = "<group>"; };
 		752E985D26451335002A5BF2 /* NotesVCExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesVCExtension.swift; sourceTree = "<group>"; };
 		752E985F264513D4002A5BF2 /* SettingsVCExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsVCExtension.swift; sourceTree = "<group>"; };
@@ -70,7 +77,6 @@
 		75776AEF262F1EFA0011C670 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		757F78D3262C4E6D00DA4CAD /* Shomer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Shomer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		757F78D6262C4E6D00DA4CAD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		757F78D8262C4E6D00DA4CAD /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		757F78DA262C4E6D00DA4CAD /* AllViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllViewController.swift; sourceTree = "<group>"; };
 		757F78E0262C4E6D00DA4CAD /* Shomer.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Shomer.xcdatamodel; sourceTree = "<group>"; };
 		757F78E2262C4E6F00DA4CAD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -80,6 +86,14 @@
 		75BBA37F263BD6CC00E846B7 /* AddNewPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewPasswordViewController.swift; sourceTree = "<group>"; };
 		75BBA383263BDAF600E846B7 /* SettingsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsCell.swift; sourceTree = "<group>"; };
 		75BBA385263C27CA00E846B7 /* LockedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LockedViewController.swift; sourceTree = "<group>"; };
+		75E8EB1C264A54360071BDD1 /* LockedViewExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LockedViewExtensions.swift; sourceTree = "<group>"; };
+		75E8EB1E264B9F8E0071BDD1 /* AddNewPasswordExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewPasswordExtension.swift; sourceTree = "<group>"; };
+		75E8EB20264B9FF30071BDD1 /* AddNewNoteExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewNoteExtension.swift; sourceTree = "<group>"; };
+		75E8EB22264BA0C80071BDD1 /* AllVCExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllVCExtension.swift; sourceTree = "<group>"; };
+		75E8EB25264BA2930071BDD1 /* NoteVCExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteVCExtension.swift; sourceTree = "<group>"; };
+		75E8EB27264BA2CF0071BDD1 /* PasswordVCExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordVCExtension.swift; sourceTree = "<group>"; };
+		75E8EB2A264BA37D0071BDD1 /* PasswordUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordUI.swift; sourceTree = "<group>"; };
+		75E8EB2C264BA6D40071BDD1 /* NoteUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteUI.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -93,13 +107,13 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		752E985626449812002A5BF2 /* SavedFiles */ = {
+		752E985626449812002A5BF2 /* PresentingVC */ = {
 			isa = PBXGroup;
 			children = (
-				752E9857264498B4002A5BF2 /* SavedPassword.swift */,
-				752E9859264498BD002A5BF2 /* SavedNote.swift */,
+				75E8EB29264BA2D60071BDD1 /* Password */,
+				75E8EB24264BA2870071BDD1 /* Note */,
 			);
-			path = SavedFiles;
+			path = PresentingVC;
 			sourceTree = "<group>";
 		};
 		752E986526483431002A5BF2 /* UIElements */ = {
@@ -116,6 +130,7 @@
 			isa = PBXGroup;
 			children = (
 				75BBA37F263BD6CC00E846B7 /* AddNewPasswordViewController.swift */,
+				75E8EB1E264B9F8E0071BDD1 /* AddNewPasswordExtension.swift */,
 			);
 			path = Password;
 			sourceTree = "<group>";
@@ -124,6 +139,7 @@
 			isa = PBXGroup;
 			children = (
 				75471F592643C19B00BD964F /* AddNewNoteViewController.swift */,
+				75E8EB20264B9FF30071BDD1 /* AddNewNoteExtension.swift */,
 			);
 			path = Note;
 			sourceTree = "<group>";
@@ -133,6 +149,7 @@
 			children = (
 				75BBA385263C27CA00E846B7 /* LockedViewController.swift */,
 				752E98702648631A002A5BF2 /* LockedViewPresenter.swift */,
+				75E8EB1C264A54360071BDD1 /* LockedViewExtensions.swift */,
 			);
 			path = LockedView;
 			sourceTree = "<group>";
@@ -219,13 +236,13 @@
 			isa = PBXGroup;
 			children = (
 				75471F5C2643E88B00BD964F /* Initial ViewControllers */,
-				752E986526483431002A5BF2 /* UIElements */,
-				752E985626449812002A5BF2 /* SavedFiles */,
+				757F78F5262C621900DA4CAD /* Extensions */,
 				75471F522643205B00BD964F /* Core Data Model */,
+				75776ADD262DBD780011C670 /* ViewControllers */,
+				752E986526483431002A5BF2 /* UIElements */,
+				752E985626449812002A5BF2 /* PresentingVC */,
 				75776AE4262EB91F0011C670 /* CellViews */,
 				757F78EE262C4FD700DA4CAD /* Support */,
-				757F78F5262C621900DA4CAD /* Extensions */,
-				75776ADD262DBD780011C670 /* ViewControllers */,
 				75471F5B2643E81800BD964F /* AddNewFile */,
 				757F78E7262C4E6F00DA4CAD /* Info.plist */,
 				757F78DF262C4E6D00DA4CAD /* Shomer.xcdatamodeld */,
@@ -237,7 +254,6 @@
 			isa = PBXGroup;
 			children = (
 				757F78D6262C4E6D00DA4CAD /* AppDelegate.swift */,
-				757F78D8262C4E6D00DA4CAD /* SceneDelegate.swift */,
 				757F78E2262C4E6F00DA4CAD /* Assets.xcassets */,
 				757F78E4262C4E6F00DA4CAD /* LaunchScreen.storyboard */,
 			);
@@ -248,11 +264,32 @@
 			isa = PBXGroup;
 			children = (
 				757F78F6262C622C00DA4CAD /* PublicExtensions.swift */,
+				75E8EB22264BA0C80071BDD1 /* AllVCExtension.swift */,
 				752E985B2645125E002A5BF2 /* PasswordsVCExtension.swift */,
 				752E985D26451335002A5BF2 /* NotesVCExtension.swift */,
 				752E985F264513D4002A5BF2 /* SettingsVCExtension.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		75E8EB24264BA2870071BDD1 /* Note */ = {
+			isa = PBXGroup;
+			children = (
+				75E8EB2C264BA6D40071BDD1 /* NoteUI.swift */,
+				752E9859264498BD002A5BF2 /* NotesVC.swift */,
+				75E8EB25264BA2930071BDD1 /* NoteVCExtension.swift */,
+			);
+			path = Note;
+			sourceTree = "<group>";
+		};
+		75E8EB29264BA2D60071BDD1 /* Password */ = {
+			isa = PBXGroup;
+			children = (
+				75E8EB2A264BA37D0071BDD1 /* PasswordUI.swift */,
+				752E9857264498B4002A5BF2 /* PasswordsVC.swift */,
+				75E8EB27264BA2CF0071BDD1 /* PasswordVCExtension.swift */,
+			);
+			path = Password;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -328,34 +365,41 @@
 				752E986B26484A61002A5BF2 /* AddNewNotes.swift in Sources */,
 				75471F512643123700BD964F /* Passwords+CoreDataProperties.swift in Sources */,
 				75471F3E2641333900BD964F /* RootViewController.swift in Sources */,
+				75E8EB2D264BA6D40071BDD1 /* NoteUI.swift in Sources */,
 				75776AED262F1ECC0011C670 /* NotesViewController.swift in Sources */,
 				75776AE6262EB9500011C670 /* CustomTableViewCell.swift in Sources */,
+				75E8EB1F264B9F8E0071BDD1 /* AddNewPasswordExtension.swift in Sources */,
 				75471F582643BA2F00BD964F /* Notes+CoreDataProperties.swift in Sources */,
 				75BBA380263BD6CC00E846B7 /* AddNewPasswordViewController.swift in Sources */,
 				75471F422642E68400BD964F /* EnterPasswordViewController.swift in Sources */,
 				75BBA386263C27CA00E846B7 /* LockedViewController.swift in Sources */,
 				752E986926484A06002A5BF2 /* AddNewPasswords.swift in Sources */,
+				75E8EB21264B9FF30071BDD1 /* AddNewNoteExtension.swift in Sources */,
 				752E98672648343F002A5BF2 /* ViewControllerUIElements.swift in Sources */,
+				75E8EB28264BA2CF0071BDD1 /* PasswordVCExtension.swift in Sources */,
 				75471F5A2643C19B00BD964F /* AddNewNoteViewController.swift in Sources */,
 				75BBA384263BDAF600E846B7 /* SettingsCell.swift in Sources */,
+				75E8EB26264BA2930071BDD1 /* NoteVCExtension.swift in Sources */,
+				75E8EB2B264BA37D0071BDD1 /* PasswordUI.swift in Sources */,
 				757F78E1262C4E6D00DA4CAD /* Shomer.xcdatamodeld in Sources */,
 				757F78D7262C4E6D00DA4CAD /* AppDelegate.swift in Sources */,
 				752E985C2645125E002A5BF2 /* PasswordsVCExtension.swift in Sources */,
 				75776AEA262F1E980011C670 /* PasswordsViewController.swift in Sources */,
 				75776ADB262DBC9B0011C670 /* TabBarController.swift in Sources */,
+				75E8EB1D264A54360071BDD1 /* LockedViewExtensions.swift in Sources */,
 				757F78F7262C622C00DA4CAD /* PublicExtensions.swift in Sources */,
 				752E9860264513D4002A5BF2 /* SettingsVCExtension.swift in Sources */,
 				75471F572643BA2F00BD964F /* Notes+CoreDataClass.swift in Sources */,
-				757F78D9262C4E6D00DA4CAD /* SceneDelegate.swift in Sources */,
 				75776AF0262F1EFA0011C670 /* SettingsViewController.swift in Sources */,
-				752E9858264498B4002A5BF2 /* SavedPassword.swift in Sources */,
+				752E9858264498B4002A5BF2 /* PasswordsVC.swift in Sources */,
 				752E98712648631A002A5BF2 /* LockedViewPresenter.swift in Sources */,
 				75471F502643123700BD964F /* Passwords+CoreDataClass.swift in Sources */,
+				75E8EB23264BA0C80071BDD1 /* AllVCExtension.swift in Sources */,
 				75471F40264199D700BD964F /* NewPasswordViewController.swift in Sources */,
 				752E985E26451335002A5BF2 /* NotesVCExtension.swift in Sources */,
 				752E986226456245002A5BF2 /* EnterPasswordToDeleteAll.swift in Sources */,
 				752E9855264470BD002A5BF2 /* NotesTableViewCell.swift in Sources */,
-				752E985A264498BD002A5BF2 /* SavedNote.swift in Sources */,
+				752E985A264498BD002A5BF2 /* NotesVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
