@@ -78,9 +78,7 @@ final class NewPasswordViewController: UIViewController, UITextFieldDelegate {
     }
     
     @objc private func successfulAuth() {
-        let tabbar = TabBarController()
-        tabbar.modalPresentationStyle = .fullScreen
-        present(tabbar, animated: true, completion: nil)
+        dismiss(animated: true, completion: nil)
     }
     
     private func enabledBiometrics() {
